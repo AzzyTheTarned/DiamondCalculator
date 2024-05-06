@@ -34,17 +34,21 @@ let initInputData = (type, img) => {
 }
 
 let calculate = (type) => {
+    document.getElementById('results').innerHTML = '';
     let inp = document.getElementById('input').getElementsByTagName('input');
+    let selected_arr = Array.from(document.getElementById('calc_choice').options).filter(function (option) { return option.selected}).map(function (option) {
+        return option.value;
+    });
     if (type === 'diag') {
-        document.getElementById('heightresult').value = (inp[0].value*inp[1].value) / Math.sqrt(inp[0].value*inp[0].value + inp[1].value*inp[1].value);
-        document.getElementById('perimeterresult').value = 2 * Math.sqrt(inp[0].value*inp[0].value + inp[1].value*inp[1].value);
-        document.getElementById('radiusresult').value = (inp[0].value*inp[1].value) / (2 * Math.sqrt(inp[0].value*inp[0].value + inp[1].value*inp[1].value));
-        document.getElementById('arearesult').value = (inp[0].value*inp[1].value) / 2;
+        if (selected_arr.includes('height')) document.getElementById('results').innerHTML += `Высота: ${inp[0].value*inp[1].value / Math.sqrt(inp[0].value*inp[0].value + inp[1].value*inp[1].value)}<br>`;
+        if (selected_arr.includes('perimeter')) document.getElementById('results').innerHTML += `Периметр: ${2 * Math.sqrt(inp[0].value*inp[0].value + inp[1].value*inp[1].value)}<br>`;
+        if (selected_arr.includes('radius')) document.getElementById('results').innerHTML += `Радиус вписанной окружности: ${(inp[0].value*inp[1].value) / (2 * Math.sqrt(inp[0].value*inp[0].value + inp[1].value*inp[1].value))}<br>`;
+        if (selected_arr.includes('area')) document.getElementById('results').innerHTML += `Площадь: ${(inp[0].value*inp[1].value) / 2}<br>`;
     } else if (type === 'side&ang') {
-        document.getElementById('heightresult').value = inp[0].value * Math.sin(toRadians(inp[1].value));
-        document.getElementById('perimeterresult').value = inp[0].value * 4;
-        document.getElementById('radiusresult').value = inp[0].value * Math.sin(toRadians(inp[1].value)) / 2;
-        document.getElementById('arearesult').value = inp[0].value * inp[0].value * Math.sin(toRadians(inp[1].value));
+        if (selected_arr.includes('height')) document.getElementById('results').innerHTML += `Высота: ${inp[0].value * Math.sin(toRadians(inp[1].value))}<br>`;
+        if (selected_arr.includes('perimeter')) document.getElementById('results').innerHTML += `Периметр: ${inp[0].value * 4}<br>`;
+        if (selected_arr.includes('radius')) document.getElementById('results').innerHTML += `Радиус вписанной окружности: ${inp[0].value * Math.sin(toRadians(inp[1].value)) / 2}<br>`;
+        if (selected_arr.includes('area')) document.getElementById('results').innerHTML += `Площадь: ${inp[0].value * inp[0].value * Math.sin(toRadians(inp[1].value))}<br>`;
     }
 }
 
@@ -56,6 +60,7 @@ document.getElementById('clear').onclick = () => {
     for (let item in document.getElementById('input').getElementsByTagName('input')) {
         document.getElementById('input').getElementsByTagName('input')[item].value = null;
     }
+    document.getElementById('results').innerHTML = '';
 }
 
 document.getElementById('calc').onclick = () => {

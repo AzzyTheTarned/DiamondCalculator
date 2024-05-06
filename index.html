@@ -29,32 +29,23 @@
             </div>
 
             <div id="error"></div>
-            
-            <input type="button" value="Вычислить" id="calc">
             <input type="button" value="Очистить" id="clear">
+            <div>
+                <select name="calc_choice" id="calc_choice" multiple>
+                    <option value="height">Высота</option>
+                    <option value="perimeter">Периметр</option>
+                    <option value="radius">Радиус описанной окружности</option>
+                    <option value="area">Площадь</option>
+                </select>
+            </div>
+            <input type="button" value="Вычислить" id="calc">
         </fieldset>
 
-        <fieldset id="results">
+        <fieldset>
             <legend>Результаты</legend>
-            <label>
-                Высота:
-                <input type="text" id="heightresult" readonly>
-            </label>
-            <br>
-            <label>
-                Периметр:
-                <input type="text" id="perimeterresult" readonly>
-            </label>
-            <br>
-            <label>
-                Радиус вписанной окружности:
-                <input type="text" id="radiusresult" readonly>
-            </label>
-            <br>
-            <label>
-                Площадь:
-                <input type="text" id="arearesult" readonly>
-            </label>
+            <div id="results">
+
+            </div>
         </fieldset>
     </body>
     <script src="script.js"></script>
