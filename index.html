@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>Калькулятор ромба</title>
+    </head>
+    <body>
+        <h2>Калькулятор ромба</h2>
+
+        <p>
+
+        </p>
+
+        <fieldset>
+            <legend>Вводные данные</legend>
+            <label>
+                Тип:
+                <select name="type" id="type">
+                    <option value="diag">Диагонали</option>
+                    <option value="side&ang">Сторона и угол</option>
+                </select>
+            </label>
+            <input type="button" value="Показать" id="show">
+
+            <div id="img">
+                <img src="" alt="">
+            </div>
+            <div id="input">
+
+            </div>
+
+            <div id="error"></div>
+            
+            <input type="button" value="Вычислить" id="calc">
+            <input type="button" value="Очистить" id="clear">
+        </fieldset>
+
+        <fieldset id="results">
+            <legend>Результаты</legend>
+            <label>
+                Высота:
+                <input type="text" id="heightresult" readonly>
+            </label>
+            <br>
+            <label>
+                Периметр:
+                <input type="text" id="perimeterresult" readonly>
+            </label>
+            <br>
+            <label>
+                Радиус вписанной окружности:
+                <input type="text" id="radiusresult" readonly>
+            </label>
+            <br>
+            <label>
+                Площадь:
+                <input type="text" id="arearesult" readonly>
+            </label>
+        </fieldset>
+    </body>
+    <script src="script.js"></script>
+</html>
