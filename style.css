@@ -6,3 +6,7 @@ fieldset {
     margin: 0 auto;
     width: 50%;
 }
+
+#error {
+    color: red;
+}
