@@ -12,13 +12,19 @@ let initInputData = (type, img) => {
         input_zone.appendChild(document.createElement('input'));
         input_zone.lastElementChild.type = 'number';
         input_zone.lastElementChild.id = 'diag1';
-        input_zone.lastElementChild.oninput = () => document.getElementById('error').innerHTML = '';
+        input_zone.lastElementChild.oninput = () => {
+            document.getElementById('error').innerHTML = '';
+            document.getElementById('input').getElementsByTagName('input')[0].className = '';
+        }
         input_zone.appendChild(document.createElement('br'));
         input_zone.appendChild(document.createTextNode('Диагональ 2:'));
         input_zone.appendChild(document.createElement('input'));
         input_zone.lastElementChild.type = 'number';
         input_zone.lastElementChild.id = 'diag2';
-        input_zone.lastElementChild.oninput = () => document.getElementById('error').innerHTML = '';
+        input_zone.lastElementChild.oninput = () => {
+            document.getElementById('error').innerHTML = '';
+            document.getElementById('input').getElementsByTagName('input')[1].className = '';
+        }
 
     } else if (document.getElementById('type').value === 'side&ang') {
         document.getElementById('img').children[0].src = 'angle.png';
@@ -26,13 +32,19 @@ let initInputData = (type, img) => {
         input_zone.appendChild(document.createElement('input'));
         input_zone.lastElementChild.type = 'number';
         input_zone.lastElementChild.id = 'side';
-        input_zone.lastElementChild.oninput = () => document.getElementById('error').innerHTML = '';
+        input_zone.lastElementChild.oninput = () => {
+            document.getElementById('error').innerHTML = '';
+            document.getElementById('input').getElementsByTagName('input')[0].className = '';
+        }
         input_zone.appendChild(document.createElement('br'));
         input_zone.appendChild(document.createTextNode('Угол:'));
         input_zone.appendChild(document.createElement('input'));
         input_zone.lastElementChild.type = 'number';
         input_zone.lastElementChild.id = 'angle';
-        input_zone.lastElementChild.oninput = () => document.getElementById('error').innerHTML = '';
+        input_zone.lastElementChild.oninput = () => {
+            document.getElementById('error').innerHTML = '';
+            document.getElementById('input').getElementsByTagName('input')[1].className = '';
+        }
     }
     calc_button.result = document.getElementById('type').value;
 }
@@ -50,26 +62,39 @@ let calculate = (type) => {
         if (inp[0].value === "" || inp[1].value === "") {
             isValidData = false;
             errorMessage = "Заполните поля диагоналей!";
+            for (let i in inp) {
+                if (inp[i].value === "") inp[i].className = "error";
+            }
         } else if (parseFloat(inp[0].value) <= 0 || parseFloat(inp[1].value) <= 0) {
             isValidData = false;
             errorMessage = "Диагонали должны быть больше нуля!";
+            for (let i in inp) {
+                if (parseFloat(inp[i].value) <= 0) inp[i].className = "error";
+            }
         } else if (selected_arr.length === 0) {
             isValidData = false;
             errorMessage = "Выберите хоть один тип вычисления!";
+            document.getElementById('calc_choice').className = 'error';
         }
     } else if (type === "side&ang") {
         if (inp[0].value === "" || inp[1].value === "") {
             isValidData = false;
             errorMessage = "Заполните поля стороны и угла!";
+            for (let i in inp) {
+                if (inp[i].value === "") inp[i].className = "error";
+            }
         } else if (parseFloat(inp[0].value) <= 0) {
             isValidData = false;
             errorMessage = "Сторона должна быть больше нуля!";
+            inp[0].className = 'error';
         } else if (parseFloat(inp[1].value) <= 0 || parseFloat(inp[1].value) >= 180) {
             isValidData = false;
             errorMessage = "Угол должен быть в пределах от 0 до 180 градусов!";
+            inp[1].className = 'error';
         } else if (selected_arr.length === 0) {
             isValidData = false;
             errorMessage = "Выберите хоть один тип вычисления!";
+            document.getElementById('calc_choice').className = 'error';
         }
     }
     document.getElementById("error").innerHTML = errorMessage;
@@ -105,5 +130,8 @@ document.getElementById('calc').onclick = () => {
     
 }
 
-document.getElementById('calc_choice').oninput = () => document.getElementById('error').innerHTML = '';
+document.getElementById('calc_choice').oninput = () => {
+    document.getElementById('error').innerHTML = '';
+    document.getElementById('calc_choice').className = '';
+}
 document.getElementById('type').oninput = () => document.getElementById('error').innerHTML = '';
